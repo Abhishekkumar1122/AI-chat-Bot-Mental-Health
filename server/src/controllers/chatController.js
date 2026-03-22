@@ -40,10 +40,13 @@ async function postMessage(req, res, next) {
       content: m.content,
     }));
 
+    // Allow provider selection via req.body.provider ("openai" or "gemini")
+    const provider = req.body.provider === 'gemini' ? 'gemini' : 'openai';
     let assistantReply = await generateAssistantReply({
       userMessage: message,
       history: historyForModel,
       moodLabel: mood.label,
+      provider,
     });
 
     if (crisis.flagged) {
