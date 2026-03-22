@@ -1,8 +1,13 @@
 {
-  "buildCommand": "npm install && npm run build -w client",
+  "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/dist",
-  "ignoreCommand": "git diff --quiet HEAD~ HEAD -- client/ package.json package-lock.json",
   "env": {
     "VITE_API_URL": "@vite_api_url"
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
